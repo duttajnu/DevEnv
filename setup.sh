@@ -6,7 +6,9 @@ echo "Installing hooks in bashrc (${current}/${total_setups})"
 path=$(pwd)
 
 cat >>~/.bashrc <<MUTE
+
 if [ -f ${path}/scripts/work_init.sh ]; then
+	export WORKENV=${path}
 	. ${path}/scripts/work_init.sh
 fi
 MUTE
