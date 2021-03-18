@@ -1,12 +1,2 @@
 let g:netrw_dirhistmax  =10
 let g:netrw_dirhistcnt =6
-let g:netrw_dirhist_6='/home/vdutta/git/obuspa'
-let g:netrw_dirhist_5='/home/vdutta/x86/feeds/iopsys'
-let g:netrw_dirhist_4='/home/vdutta/x86/feeds/iopsys/map-topology'
-let g:netrw_dirhist_3='/home/vdutta/git/STD/openwrt/libubox'
-let g:netrw_dirhist_2='/home/vdutta/git/uspd/src'
-let g:netrw_dirhist_1='/home/vdutta/git/obuspa'
-let g:netrw_dirhist_0='/home/vdutta/git/obuspa/src'
-let g:netrw_dirhist_9='/home/vdutta/ex400/feeds/iopsys/obuspa/files/etc/config'
-let g:netrw_dirhist_8='/home/vdutta/git/uspd/test/cmocka'
-let g:netrw_dirhist_7='/home/vdutta/git/obuspa/openwrt/obuspa/files/etc/config'
