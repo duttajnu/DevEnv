@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mkdir -p /tmp/cscopedb
+mkdir -p /tmp/cscopedb_${USER}
 
 function set_project()
 {
@@ -16,15 +16,17 @@ function set_project()
 		db_name="${db_name}_${p}"
 	done
 
-	echo >/tmp/cscopedb/cscope${db_name}.files
+	echo >/tmp/cscopedb_${USER}/cscope${db_name}.files
 	for p in ${proj}
 	do
-		find ${PWD} -name "*.[ch]" >>/tmp/cscopedb/cscope${db_name}.files
+		find ${PWD} -name "*.[ch]" >>/tmp/cscopedb_${USER}/cscope${db_name}.files
+		find ${PWD} -name "*.py" >>/tmp/cscopedb_${USER}/cscope${db_name}.files
+		find ${PWD} -name "*.[ch]pp" >>/tmp/cscopedb_${USER}/cscope${db_name}.files
 	done
 
-	cscope -b -i /tmp/cscopedb/cscope${db_name}.files -f /tmp/cscopedb/cscope${db_name}.out
+	cscope -b -i /tmp/cscopedb_${USER}/cscope${db_name}.files -f /tmp/cscopedb_${USER}/cscope${db_name}.out
 
-	export CSCOPE_DB=/tmp/cscopedb/cscope${db_name}.out
+	export CSCOPE_DB=/tmp/cscopedb_${USER}/cscope${db_name}.out
 	echo "## Project ${CSCOPE_DB} active ##"
 }
 
