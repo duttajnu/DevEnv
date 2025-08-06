@@ -4,11 +4,13 @@ mkdir -p /tmp/cscopedb_${USER}
 
 function set_project()
 {
-	local proj=${@}
+	local proj="${@}"
 	local db_name=""
+	local DBFILE nopath path
 
-	if [ -z ${proj} ]; then
+	if [ -z "${proj}" ]; then
 		proj=$(basename ${PWD})
+		path=${PWD}
 	fi
 
 	for p in ${proj}
@@ -16,17 +18,25 @@ function set_project()
 		db_name="${db_name}_${p}"
 	done
 
-	echo >/tmp/cscopedb_${USER}/cscope${db_name}.files
+	DBFILE="/tmp/cscopedb_${USER}/cscope${db_name}.files"
+	DBOUT="/tmp/cscopedb_${USER}/cscope${db_name}.out"
+	echo >${DBFILE}
+
 	for p in ${proj}
 	do
-		find ${PWD} -name "*.[ch]" >>/tmp/cscopedb_${USER}/cscope${db_name}.files
-		find ${PWD} -name "*.py" >>/tmp/cscopedb_${USER}/cscope${db_name}.files
-		find ${PWD} -name "*.[ch]pp" >>/tmp/cscopedb_${USER}/cscope${db_name}.files
+		if [ -z "${path}" ]; then
+			path="${PWD}/${p}"
+		fi
+
+		find ${path} -name "*.[ch]" >>${DBFILE}
+		find ${path} -name "*.py" >>${DBFILE}
+		find ${path} -name "*.js" >>${DBFILE}
+		find ${path} -name "*.[ch]pp" >>${DBFILE}
 	done
 
-	cscope -b -i /tmp/cscopedb_${USER}/cscope${db_name}.files -f /tmp/cscopedb_${USER}/cscope${db_name}.out
+	cscope -b -i ${DBFILE} -f ${DBOUT}
 
-	export CSCOPE_DB=/tmp/cscopedb_${USER}/cscope${db_name}.out
-	echo "## Project ${CSCOPE_DB} active ##"
+	export CSCOPE_DB=${DBOUT}
+	echo "## Project ${CSCOPE_DB}, files ${DBFILE} active ##"
 }
 

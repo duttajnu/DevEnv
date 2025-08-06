@@ -18,3 +18,7 @@ set go -=T
 let g:gitgutter_max_signs = 500
 set colorcolumn=80
 let g:linuxsty_patterns = [ "/home/${USER}/git/" ]
+autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4
+set backupdir=~/.vim/backup/,/tmp//
+set directory=~/.vim/swp/,/tmp//
+set undodir=~/.vim/undo/,/tmp//
